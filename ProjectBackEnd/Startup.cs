@@ -26,6 +26,7 @@ namespace ProjectBackEnd
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+            services.AddSwaggerDocument();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -46,6 +47,10 @@ namespace ProjectBackEnd
             {
                 endpoints.MapControllers();
             });
+
+            ///Swagger
+            app.UseOpenApi();
+            app.UseSwaggerUi3();
         }
     }
 }
