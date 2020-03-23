@@ -13,15 +13,17 @@ namespace ProjectBackEnd.Models
         public Quote Quote { get; set; }
         public int Rating { get; set; }
         public int Id { get; set; }
+        public Auteur Auteur { get; set; }
         #endregion
 
         #region Constructor
-        public Opmerking(string inhoud, DateTime date, Quote quote, int rating)
+        public Opmerking(string inhoud, DateTime date, Quote quote, Auteur auteur)
         {
             Inhoud = inhoud;
             Date = date;
             Quote = quote;
-            Rating = rating;
+            Rating = 0;
+            Auteur = auteur;
         }
 
         public Opmerking()

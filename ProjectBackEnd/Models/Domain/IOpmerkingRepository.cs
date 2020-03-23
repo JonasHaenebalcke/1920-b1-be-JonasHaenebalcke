@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace ProjectBackEnd.Models
 {
-    interface IOpmerkingRepository
+    public interface IOpmerkingRepository
     {
         Opmerking GetBy(int id);
         IEnumerable<Opmerking> GetAll(int quoteId);

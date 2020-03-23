@@ -21,7 +21,7 @@ namespace ProjectBackEnd.Data.Repositories
 
         public IEnumerable<Quote> GetAll()
         {
-            return _quotes.ToList();
+            return _quotes.Include(q => q.Opmerkingen).Include(q => q.Auteur).ToList();
         }
 
         public IEnumerable<Quote> GetAllOrderByDate()

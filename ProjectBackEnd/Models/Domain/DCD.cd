@@ -8,7 +8,7 @@
       </MemberNameLabel>
     </AssociationLine>
     <TypeIdentifier>
-      <HashCode>AAAAAAAgQAAIAAAAAAAAAAAAgAAAAAAAAACAIAgAAgA=</HashCode>
+      <HashCode>AAACAAAgQAAIAAAAAAAAAAAAgAAAAAAAAACAYAgAAAA=</HashCode>
       <FileName>Models\Domain\Auteur.cs</FileName>
     </TypeIdentifier>
     <ShowAsCollectionAssociation>
@@ -16,14 +16,14 @@
     </ShowAsCollectionAssociation>
   </Class>
   <Class Name="ProjectBackEnd.Models.Opmerking">
-    <Position X="6" Y="4" Width="2.25" />
+    <Position X="6.25" Y="5.25" Width="2.25" />
     <AssociationLine Name="Quote" Type="ProjectBackEnd.Models.Quote">
       <MemberNameLabel ManuallyPlaced="true">
-        <Position X="-0.732" Y="1.535" />
+        <Position X="-1.067" Y="1.267" />
       </MemberNameLabel>
     </AssociationLine>
     <TypeIdentifier>
-      <HashCode>AAAAAgAAAAAAAAAAAAAAAAAAgAAAAAEBAAAAAAAAAgA=</HashCode>
+      <HashCode>AAACAgAAAAAAAAAAAAAAAAAAgAAAAAEBAAAAAAAAAAA=</HashCode>
       <FileName>Models\Domain\Opmerking.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
@@ -43,7 +43,7 @@
       </MemberNameLabel>
     </AssociationLine>
     <TypeIdentifier>
-      <HashCode>AAAABgABAAAAAAAAAAAAAAAAAAAAAAEBAAAAAEAAAgA=</HashCode>
+      <HashCode>AAACBgABAAAAAAAAAAAAAAAAAAAAAAEBAAAAAEAAAAA=</HashCode>
       <FileName>Models\Domain\Quote.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>

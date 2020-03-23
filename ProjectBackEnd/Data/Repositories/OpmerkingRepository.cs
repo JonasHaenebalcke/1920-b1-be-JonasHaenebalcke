@@ -21,7 +21,7 @@ namespace ProjectBackEnd.Data.Repositories
 
         public IEnumerable<Opmerking> GetAll(int quoteId)
         {
-            return _opmerkingen.Where(o => o.Quote.Id == quoteId).ToList();
+            return _opmerkingen.Where(o => o.Quote.Id == quoteId).Include(o => o.Quote).ToList();
         }
 
         public Opmerking GetBy(int id)

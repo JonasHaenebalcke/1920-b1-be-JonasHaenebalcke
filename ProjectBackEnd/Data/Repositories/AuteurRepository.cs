@@ -21,7 +21,7 @@ namespace ProjectBackEnd.Data.Repositories
 
         public IEnumerable<Auteur> GetAll()
         {
-            return _auteurs.ToList().OrderBy(a => a.Achternaam);
+            return _auteurs.Include(a => a.Quotes).ToList().OrderBy(a => a.Achternaam);
         }
 
         public Auteur GetBy(int id)

@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace ProjectBackEnd.Models
 {
-    interface IQuoteRepository
+    public interface IQuoteRepository
     {
         Quote GetBy(int id);
         IEnumerable<Quote> GetAll();
