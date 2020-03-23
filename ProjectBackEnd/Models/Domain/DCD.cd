@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="FullSignature">
+  <Class Name="ProjectBackEnd.Models.Auteur">
+    <Position X="0.75" Y="0.75" Width="2.75" />
+    <AssociationLine Name="Quotes" Type="ProjectBackEnd.Models.Quote">
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="0.668" Y="0.102" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAgQAAIAAAAAAAAAAAAgAAAAAAAAACAIAgAAgA=</HashCode>
+      <FileName>Models\Domain\Auteur.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="Quotes" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="ProjectBackEnd.Models.Opmerking">
+    <Position X="6" Y="4" Width="2.25" />
+    <AssociationLine Name="Quote" Type="ProjectBackEnd.Models.Quote">
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="-0.732" Y="1.535" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAgAAAAAAAAAAAAAAAAAAgAAAAAEBAAAAAAAAAgA=</HashCode>
+      <FileName>Models\Domain\Opmerking.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Quote" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="ProjectBackEnd.Models.Quote">
+    <Position X="6.25" Y="0.75" Width="2.25" />
+    <AssociationLine Name="Opmerkingen" Type="ProjectBackEnd.Models.Opmerking">
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="0.027" Y="1.435" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <AssociationLine Name="Auteur" Type="ProjectBackEnd.Models.Auteur">
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="1.952" Y="0.135" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAAABgABAAAAAAAAAAAAAAAAAAAAAAEBAAAAAEAAAgA=</HashCode>
+      <FileName>Models\Domain\Quote.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Auteur" />
+    </ShowAsAssociation>
+    <ShowAsCollectionAssociation>
+      <Property Name="Opmerkingen" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
