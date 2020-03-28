@@ -1,16 +1,9 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using ProjectBackEnd.Data;
 using ProjectBackEnd.Data.Repositories;
 using ProjectBackEnd.Models;
@@ -45,10 +38,15 @@ namespace ProjectBackEnd
             services.AddOpenApiDocument(c =>
             {
                 c.DocumentName = "apidocs";
-                c.Title = "Reminder API";
+                c.Title = "Quote API";
                 c.Version = "v1";
-                c.Description = "The Reminder API documentation description.";
+                c.Description = "The Quote API documentation description.";
             }); //for OpenAPI 3.0 else AddSwaggerDocument();
+
+            //CORS
+            services.AddCors(options =>
+            options.AddPolicy("AllowAllOrigins", builder =>
+            builder.AllowAnyOrigin()));
 
         }
 
@@ -73,8 +71,11 @@ namespace ProjectBackEnd
             {
                 endpoints.MapControllers();
             });
-                
+
             ApplicationDataInitializer.InitializeData();
+
+            //CORS
+            app.UseCors("AllowAllOrigins");
         }
     }
 }

@@ -26,7 +26,7 @@ namespace ProjectBackEnd.Data.Repositories
 
         public Auteur GetBy(int id)
         {
-            return _auteurs.Where(a => a.Id == id).FirstOrDefault();
+            return _auteurs.Where(a => a.Id == id).Include(a => a.Quotes).FirstOrDefault();
         }
 
         public void SaveChanges()

@@ -19,19 +19,14 @@ namespace ProjectBackEnd.Data.Repositories
         }
 
 
-        public IEnumerable<Opmerking> GetAll(int quoteId)
+        public IEnumerable<Opmerking> GetAllOrderByDate(int quoteId)
         {
-            return _opmerkingen.Where(o => o.Quote.Id == quoteId).Include(o => o.Quote).ToList();
+            return _opmerkingen.Where(o => o.Quote.Id == quoteId).Include(o => o.Quote).Include(o => o.Auteur).ToList();
         }
 
         public Opmerking GetBy(int id)
         {
-            return _opmerkingen.Where(o => o.Id == id).FirstOrDefault();
-        }
-
-        public IEnumerable<Opmerking> GetAllOrderByRating(int quoteId)
-        {
-            return _opmerkingen.Where(o => o.Quote.Id == quoteId).OrderBy(o => o.Rating).ToList();
+            return _opmerkingen.Where(o => o.Id == id).Include(o => o.Quote).Include( o => o.Auteur).FirstOrDefault();
         }
 
         public void SaveChanges()
