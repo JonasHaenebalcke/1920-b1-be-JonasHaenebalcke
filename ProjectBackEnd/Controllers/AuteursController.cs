@@ -13,14 +13,10 @@ namespace ProjectBackEnd.Controllers
     public class AuteursController : ControllerBase
     {
         private readonly IAuteurRepository _auteurRepository;
-        private readonly IOpmerkingRepository _opmerkingRepository;
-        private readonly IQuoteRepository _quoteRepository;
 
-        public AuteursController(IAuteurRepository auteur, IOpmerkingRepository opmerking, IQuoteRepository quote)
+        public AuteursController(IAuteurRepository auteur)
         {
             _auteurRepository = auteur;
-            _opmerkingRepository = opmerking;
-            _quoteRepository = quote;
         }
 
         /// <summary>

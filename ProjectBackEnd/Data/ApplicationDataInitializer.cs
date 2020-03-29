@@ -40,7 +40,10 @@ namespace ProjectBackEnd.Data
                 Opmerking opmerking1 = new Opmerking("Nice one Axel", new DateTime(2020, 3, 20, 12, 30, 0), quote1, jonas);
                 Opmerking opmerking2 = new Opmerking("Nice one Jonas", new DateTime(2020, 3, 15, 15, 40, 0), quote2, wout);
                 Opmerking opmerking3 = new Opmerking("Nice one Wout", new DateTime(2020, 3, 10, 18, 20, 0), quote3, axel);
-                _context.Opmerkingen.AddRange(opmerking1, opmerking2, opmerking3);
+                Opmerking opmerking4 = new Opmerking("Haha", new DateTime(2020, 3, 10, 14, 10, 00), quote2, axel);
+                Opmerking opmerking5 = new Opmerking("That's the spirit", new DateTime(2020, 3, 5, 20, 20, 20), quote2, axel);
+
+                _context.Opmerkingen.AddRange(opmerking1, opmerking2, opmerking3, opmerking4, opmerking5);
                 _context.SaveChanges();
             }
         }
