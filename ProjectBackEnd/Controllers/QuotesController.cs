@@ -2,25 +2,31 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using ProjectBackEnd.DTOs;
 using ProjectBackEnd.Models;
+using ProjectBackEnd.Models.Domain;
 
 namespace ProjectBackEnd.Controllers
 {
     [ApiConventionType(typeof(DefaultApiConventions))]
     [Route("api/[controller]")]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     [ApiController]
     public class QuotesController : ControllerBase
     {   
         private readonly IOpmerkingRepository _opmerkingRepository;
         private readonly IQuoteRepository _quoteRepository;
+        private readonly IGebruikerRepository _gebruikerRepository;
 
-        public QuotesController(IOpmerkingRepository opmerking, IQuoteRepository quote)
+        public QuotesController(IOpmerkingRepository opmerking, IQuoteRepository quote, IGebruikerRepository gebruikerRepository)
         {
             _opmerkingRepository = opmerking;
             _quoteRepository = quote;
+            _gebruikerRepository = gebruikerRepository;
         }
         // GET: api/Quotes
         /// <summary>
@@ -28,6 +34,7 @@ namespace ProjectBackEnd.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
+        [AllowAnonymous]
         public IEnumerable<Quote> GetQuotes()
         {   
             return _quoteRepository.GetAll();
