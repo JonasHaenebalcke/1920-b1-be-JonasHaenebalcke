@@ -10,7 +10,6 @@ namespace ProjectBackEnd.DTOs
         public string Voornaam { get; set; }
         public string Achternaam { get; set; }
         public DateTime GeboortDatum { get; set; }
-        public DateTime? SterfDatum { get; set; }
         public string Omschrijving { get; set; }
 
         //Hoe zou ik dit meegeven?

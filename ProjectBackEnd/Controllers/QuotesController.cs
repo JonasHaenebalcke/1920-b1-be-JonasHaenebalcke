@@ -29,7 +29,7 @@ namespace ProjectBackEnd.Controllers
         /// <returns></returns>
         [HttpGet]
         public IEnumerable<Quote> GetQuotes()
-        {
+        {   
             return _quoteRepository.GetAll();
         }
 

@@ -1,9 +1,8 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using ProjectBackEnd.Models;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace ProjectBackEnd.Data.Repositories
 {
@@ -19,6 +18,11 @@ namespace ProjectBackEnd.Data.Repositories
             _auteurs = dbContext.Auteurs;
         }
 
+        public void Add(Auteur auteur)
+        {
+            _auteurs.Add(auteur);
+        }
+
         public IEnumerable<Auteur> GetAll()
         {
             return _auteurs.Include(a => a.Quotes).ToList().OrderBy(a => a.Achternaam);
@@ -27,6 +31,11 @@ namespace ProjectBackEnd.Data.Repositories
         public Auteur GetBy(int id)
         {
             return _auteurs.Where(a => a.Id == id).Include(a => a.Quotes).FirstOrDefault();
+        }
+
+        public Auteur getByName(string name)
+        {
+            return _auteurs.Where(a => (a.Voornaam + " " + a.Achternaam).ToLower().Equals(name)).Include(a => a.Quotes).FirstOrDefault();
         }
 
         public void SaveChanges()

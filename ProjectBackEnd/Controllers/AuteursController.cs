@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
+using ProjectBackEnd.DTOs;
 using ProjectBackEnd.Models;
+using System.Collections.Generic;
 
 namespace ProjectBackEnd.Controllers
 {
@@ -27,6 +24,36 @@ namespace ProjectBackEnd.Controllers
         public IEnumerable<Auteur> GetAuteurs()
         {
             return _auteurRepository.GetAll();
+        }
+
+        [HttpGet("{naam}")]
+        public ActionResult<Auteur> getAuteurByName(string naam)
+        {
+            /*  Quote quote = _quoteRepository.GetBy(id);
+             if (quote == null)
+                 return NotFound();
+             return quote;*/
+
+            Auteur auteur = _auteurRepository.getByName(naam);
+            if (auteur == null)
+                return NotFound();
+            return auteur;
+        }
+
+
+        /// <summary>
+        /// Maakt een nieuwe auteur aan
+        /// </summary>
+        /// <param name="dto"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public ActionResult PostAuteur(AuteurDTO dto)
+        {
+            Auteur auteur = new Auteur(dto.Voornaam, dto.Achternaam, dto.GeboortDatum, dto.Omschrijving, null);
+            _auteurRepository.Add(auteur);
+            _auteurRepository.SaveChanges();
+            return CreatedAtAction(nameof(getAuteurByName), new { naam = auteur.Voornaam + " " + auteur.Achternaam }, auteur);
+
         }
     }
 }
