@@ -1,6 +1,8 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using ProjectBackEnd.Data.Mappers;
 using ProjectBackEnd.Models;
+using ProjectBackEnd.Models.Domain;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,11 +10,12 @@ using System.Threading.Tasks;
 
 namespace ProjectBackEnd.Data
 {
-    public class ApplicationDbContext : DbContext
+    public class ApplicationDbContext : IdentityDbContext
     {
         public DbSet<Quote> Quotes { get; set; }
         public DbSet<Auteur> Auteurs { get; set; }
         public DbSet<Opmerking> Opmerkingen { get; set; }
+        public DbSet<Gebruiker> Gebruikers { get; set; }
 
         //Niet zeker wat dit doet
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)

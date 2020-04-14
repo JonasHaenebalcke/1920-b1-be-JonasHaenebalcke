@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -11,6 +12,8 @@ using NSwag.Generation.Processors.Security;
 using ProjectBackEnd.Data;
 using ProjectBackEnd.Data.Repositories;
 using ProjectBackEnd.Models;
+using ProjectBackEnd.Models.Domain;
+using System;
 using System.Linq;
 using System.Text;
 
@@ -39,6 +42,31 @@ namespace ProjectBackEnd
             services.AddScoped<IAuteurRepository, AuteurRepository>();
             services.AddScoped<IOpmerkingRepository, OpmerkingRepository>();
             services.AddScoped<IQuoteRepository, QuoteRepository>();
+            services.AddScoped<IGebruikerRepository, GebruikerRepository>();
+
+            services.AddIdentity<IdentityUser, IdentityRole>(cfg => cfg.User.RequireUniqueEmail = true).AddEntityFrameworkStores<ApplicationDbContext>();
+
+            services.Configure<IdentityOptions>(options =>
+            {
+                // Password settings.
+                options.Password.RequireDigit = false;
+                options.Password.RequireLowercase = false;
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequireUppercase = false;
+                options.Password.RequiredLength = 6;
+                options.Password.RequiredUniqueChars = 0;
+
+                // Lockout settings.
+                options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);
+                options.Lockout.MaxFailedAccessAttempts = 5;
+                options.Lockout.AllowedForNewUsers = true;
+
+                // User settings.
+                options.User.AllowedUserNameCharacters =
+                "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._@+";
+               // options.User.RequireUniqueEmail = true;
+            });
+
 
             // Swagger
             services.AddOpenApiDocument(c =>
@@ -102,7 +130,7 @@ namespace ProjectBackEnd
                 endpoints.MapControllers();
             });
 
-            ApplicationDataInitializer.InitializeData();
+            ApplicationDataInitializer.InitializeData().Wait();
 
             //CORS
             app.UseCors("AllowAllOrigins");

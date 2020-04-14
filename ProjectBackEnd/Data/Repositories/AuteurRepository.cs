@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using ProjectBackEnd.Models;
 using System.Collections.Generic;
 using System.Linq;
@@ -33,7 +32,7 @@ namespace ProjectBackEnd.Data.Repositories
             return _auteurs.Where(a => a.Id == id).Include(a => a.Quotes).FirstOrDefault();
         }
 
-        public Auteur getByName(string name)
+        public Auteur GetByName(string name)
         {
             return _auteurs.Where(a => (a.Voornaam + " " + a.Achternaam).ToLower().Equals(name)).Include(a => a.Quotes).FirstOrDefault();
         }

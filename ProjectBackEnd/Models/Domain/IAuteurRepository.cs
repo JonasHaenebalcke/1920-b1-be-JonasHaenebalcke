@@ -11,7 +11,7 @@ namespace ProjectBackEnd.Models
         Auteur GetBy(int id);
         IEnumerable<Auteur> GetAll();
         void SaveChanges();
-        Auteur getByName(string name);
+        Auteur GetByName(string name);
         void Add(Auteur auteur);
     }
 }

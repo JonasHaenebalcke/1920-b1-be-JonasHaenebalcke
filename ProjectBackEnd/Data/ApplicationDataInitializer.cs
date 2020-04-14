@@ -1,7 +1,7 @@
-﻿using ProjectBackEnd.Models;
+﻿using Microsoft.AspNetCore.Identity;
+using ProjectBackEnd.Models;
+using ProjectBackEnd.Models.Domain;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace ProjectBackEnd.Data
@@ -9,13 +9,15 @@ namespace ProjectBackEnd.Data
     public class ApplicationDataInitializer
     {
         private readonly ApplicationDbContext _context;
+        private readonly UserManager<IdentityUser> _userManager;
 
-        public ApplicationDataInitializer(ApplicationDbContext context)
+        public ApplicationDataInitializer(ApplicationDbContext context, UserManager<IdentityUser> userManager)
         {
             _context = context;
+            _userManager = userManager;
         }
 
-        public void InitializeData()
+        public async Task InitializeData()
         {
             _context.Database.EnsureDeleted();
 
@@ -45,7 +47,21 @@ namespace ProjectBackEnd.Data
 
                 _context.Opmerkingen.AddRange(opmerking1, opmerking2, opmerking3, opmerking4, opmerking5);
                 _context.SaveChanges();
+
+
+
+                Gebruiker gebruiker = new Gebruiker("Jonas", "Haenebalcke", "Jonidinges");
+                _context.Gebruikers.Add(gebruiker);
+                await CreateUser(gebruiker.Gebruikesnaam, "wachtwoord");
+                _context.SaveChanges();
             }
+        }
+
+
+        private async Task CreateUser(string gebruikersnaam, string password)
+        {
+            var user = new IdentityUser { UserName = gebruikersnaam };
+            await _userManager.CreateAsync(user, password);
         }
     }
 }

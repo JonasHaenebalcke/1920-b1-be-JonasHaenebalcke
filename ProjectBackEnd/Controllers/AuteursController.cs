@@ -27,14 +27,14 @@ namespace ProjectBackEnd.Controllers
         }
 
         [HttpGet("{naam}")]
-        public ActionResult<Auteur> getAuteurByName(string naam)
+        public ActionResult<Auteur> GetAuteurByName(string naam)
         {
             /*  Quote quote = _quoteRepository.GetBy(id);
              if (quote == null)
                  return NotFound();
              return quote;*/
 
-            Auteur auteur = _auteurRepository.getByName(naam);
+            Auteur auteur = _auteurRepository.GetByName(naam);
             if (auteur == null)
                 return NotFound();
             return auteur;
@@ -52,7 +52,7 @@ namespace ProjectBackEnd.Controllers
             Auteur auteur = new Auteur(dto.Voornaam, dto.Achternaam, dto.GeboortDatum, dto.Omschrijving, null);
             _auteurRepository.Add(auteur);
             _auteurRepository.SaveChanges();
-            return CreatedAtAction(nameof(getAuteurByName), new { naam = auteur.Voornaam + " " + auteur.Achternaam }, auteur);
+            return CreatedAtAction(nameof(GetAuteurByName), new { naam = auteur.Voornaam + " " + auteur.Achternaam }, auteur);
 
         }
     }
