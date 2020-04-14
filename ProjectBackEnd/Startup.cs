@@ -1,12 +1,18 @@
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.IdentityModel.Tokens;
+using NSwag;
+using NSwag.Generation.Processors.Security;
 using ProjectBackEnd.Data;
 using ProjectBackEnd.Data.Repositories;
 using ProjectBackEnd.Models;
+using System.Linq;
+using System.Text;
 
 namespace ProjectBackEnd
 {
@@ -41,6 +47,17 @@ namespace ProjectBackEnd
                 c.Title = "Quote API";
                 c.Version = "v1";
                 c.Description = "The Quote API documentation description.";
+                c.AddSecurity(
+                    "JWT",
+                    Enumerable.Empty<string>(), new OpenApiSecurityScheme
+                    {
+                        Type = OpenApiSecuritySchemeType.ApiKey,
+                        Name = "Authorization",
+                        In = OpenApiSecurityApiKeyLocation.Header,
+                        Description = "Type into the textbox: Bearer {your JWT token}."
+                    });
+                c.OperationProcessors.Add(
+                    new AspNetCoreOperationSecurityScopeProcessor("JWT")); //adds the token when a request is send});
             }); //for OpenAPI 3.0 else AddSwaggerDocument();
 
             //CORS
@@ -48,6 +65,19 @@ namespace ProjectBackEnd
             options.AddPolicy("AllowAllOrigins", builder =>
             builder.AllowAnyOrigin()));
 
+
+
+            services.AddAuthentication(x => { x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme; }).AddJwtBearer(x =>
+            {
+                x.RequireHttpsMetadata = false; x.SaveToken = true; x.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["Tokens:Key"])),
+                    ValidateIssuer = false,
+                    ValidateAudience = false,
+                    RequireExpirationTime = true//Ensure token hasn't expired
+                };
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -76,6 +106,8 @@ namespace ProjectBackEnd
 
             //CORS
             app.UseCors("AllowAllOrigins");
+
+            app.UseAuthentication();
         }
     }
 }
