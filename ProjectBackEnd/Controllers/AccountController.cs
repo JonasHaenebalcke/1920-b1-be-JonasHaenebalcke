@@ -34,7 +34,8 @@ namespace ProjectBackEnd.Controllers
         [HttpPost("register")]
         public async Task<ActionResult<String>> Register(RegisterDTO model)
         {
-            IdentityUser user = new IdentityUser { UserName = model.Gebruikersnaam};
+            
+            IdentityUser user = new IdentityUser { UserName = model.Gebruikersnaam };
             Gebruiker gebruiker = new Gebruiker(model.Voornaam, model.Achternaam, model.Gebruikersnaam);
             var result = await _userManager.CreateAsync(user, model.Wachtwoord);
 
@@ -46,6 +47,15 @@ namespace ProjectBackEnd.Controllers
                 return Created("", token);
             }
             return BadRequest();
+        }
+
+        [AllowAnonymous]
+        [HttpGet("checkusername")]
+        public async Task<ActionResult<Boolean>>    
+        CheckAvailableUserName(string gebuikersnaam)
+        {
+            var user = await _userManager.FindByNameAsync(gebuikersnaam);
+            return user == null;
         }
 
 
@@ -64,7 +74,7 @@ namespace ProjectBackEnd.Controllers
         }
 
         private String GetToken(IdentityUser user)
-        {   
+        {
             // Createthetoken
             var claims = new[] {
               //  new Claim(JwtRegisteredClaimNames.Sub, user.Email), Niet zeker of dit in commentaar mag

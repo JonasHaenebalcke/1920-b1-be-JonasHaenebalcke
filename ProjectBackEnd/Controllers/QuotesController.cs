@@ -45,6 +45,7 @@ namespace ProjectBackEnd.Controllers
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
+        [AllowAnonymous]
         [HttpGet("{id}")]
         public ActionResult<Quote> GetQuote(int id)
         {

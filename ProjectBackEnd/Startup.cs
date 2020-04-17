@@ -44,7 +44,7 @@ namespace ProjectBackEnd
             services.AddScoped<IQuoteRepository, QuoteRepository>();
             services.AddScoped<IGebruikerRepository, GebruikerRepository>();
 
-            services.AddIdentity<IdentityUser, IdentityRole>(cfg => cfg.User.RequireUniqueEmail = true).AddEntityFrameworkStores<ApplicationDbContext>();
+            services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<ApplicationDbContext>();
 
             services.Configure<IdentityOptions>(options =>
             {

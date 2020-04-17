@@ -4,8 +4,7 @@ namespace ProjectBackEnd.DTOs
 {
     public class LoginDTO
     {
-        
-        [EmailAddress] 
+        [Required]
         public string Gebruikersnaam { get; set; }
         [Required]
         public string Wachtwoord { get; set; }
