@@ -16,16 +16,24 @@ namespace ProjectBackEnd.Controllers
             _auteurRepository = auteur;
         }
 
+
+        // GET : api/Auteurs
         /// <summary>
         /// Geeft alle auteurs terug
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Alle auteurs</returns>
         [HttpGet]
         public IEnumerable<Auteur> GetAuteurs()
         {
             return _auteurRepository.GetAll();
         }
 
+        // GET: api/Auteurs/[NaamAuteur]
+        /// <summary>
+        /// Geeft auteur terug gebaseerd op naam
+        /// </summary>
+        /// <param name="naam"></param>
+        /// <returns>auteur gefilterd op naam</returns>
         [HttpGet("{naam}")]
         public ActionResult<Auteur> GetAuteurByName(string naam)
         {
@@ -40,12 +48,12 @@ namespace ProjectBackEnd.Controllers
             return auteur;
         }
 
-
+        // POST: api/Auteurs
         /// <summary>
         /// Maakt een nieuwe auteur aan
         /// </summary>
         /// <param name="dto"></param>
-        /// <returns></returns>
+        /// <returns>De nieuwe auteur</returns>
         [HttpPost]
         public ActionResult PostAuteur(AuteurDTO dto)
         {

@@ -32,7 +32,7 @@ namespace ProjectBackEnd.Controllers
         /// <summary>
         /// Geeft alle quotes terug, gestorteerd op datum
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Alle quotes</returns>
         [HttpGet]
         [AllowAnonymous]
         public IEnumerable<Quote> GetQuotes()
@@ -40,11 +40,12 @@ namespace ProjectBackEnd.Controllers
             return _quoteRepository.GetAll();
         }
 
+        // GET: api/Quotes/[id]
         /// <summary>
         /// Geeft quote van gegeven id terug
         /// </summary>
         /// <param name="id"></param>
-        /// <returns></returns>
+        /// <returns>Quote gefiltered op id</returns>
         [AllowAnonymous]
         [HttpGet("{id}")]
         public ActionResult<Quote> GetQuote(int id)
@@ -55,11 +56,12 @@ namespace ProjectBackEnd.Controllers
             return quote;
         }
 
+        // POST: api/Quotes
         /// <summary>
         /// Maakt een nieuwe quote
         /// </summary>
         /// <param name="dto"></param>
-        /// <returns></returns>
+        /// <returns>De nieuwe quote</returns>
         [HttpPost]
         public ActionResult PostQuote(QuoteDTO dto)
         {
@@ -70,12 +72,13 @@ namespace ProjectBackEnd.Controllers
 
         }
 
+        // PUT: api/quotes/[id]
         /// <summary>
         /// Update een quote
         /// </summary>
         /// <param name="id"></param>
         /// <param name="quote"></param>
-        /// <returns></returns>
+        /// <returns>Aangepaste quote</returns>
         [HttpPut("{id}")]
         public IActionResult PutQuote(int id, Quote quote)
         {
@@ -87,6 +90,7 @@ namespace ProjectBackEnd.Controllers
             return NoContent();
         }
 
+        // DELETE:api/Quotes/[id]
         /// <summary>
         /// Verwijderd een quote
         /// </summary>
@@ -104,23 +108,25 @@ namespace ProjectBackEnd.Controllers
             return NoContent();
         }
 
+        // GET api/Quotes/[id]
         /// <summary>
         /// Geeft alle opmerkingen van een meegegeven quote, geordend op datum
         /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
+        /// <param name="id">id van de corresponderende quote</param>
+        /// <returns>alle opermkingen van opgegeven quote id</returns>
         [HttpGet("{id}/opmerkingen")]
         public IEnumerable<Opmerking>GetOpmerkingenByDate(int id)//id is quote id
         {
            return _opmerkingRepository.GetAllOrderByDate(id);
         }
 
+        // POST api/Quotes/[id]
         /// <summary>
         /// Plaatst een opmerking bij de meegegeven quote
         /// </summary>
         /// <param name="id"></param>
         /// <param name="dto"></param>
-        /// <returns></returns>
+        /// <returns>De nieuwe opmerking</returns>
         [HttpPost("{id}/opmerkingen")]
         public ActionResult<Opmerking> PostOpmerking(int id, OpmerkingDTO dto)
         {

@@ -30,6 +30,11 @@ namespace ProjectBackEnd.Controllers
             _config = config;
         }
 
+        /// <summary>
+        /// Register
+        /// </summary>
+        /// <param name="model"> details van gebruiker</param>
+        /// <returns></returns>
         [AllowAnonymous]
         [HttpPost("register")]
         public async Task<ActionResult<String>> Register(RegisterDTO model)
@@ -49,6 +54,11 @@ namespace ProjectBackEnd.Controllers
             return BadRequest();
         }
 
+        /// <summary>
+        /// controleert of een gebruikersnaam nog beschikbaar is
+        /// </summary>
+        /// <param name="gebuikersnaam"></param>
+        /// <returns>of gebruikersnaam nog beschrikbaar is</returns>
         [AllowAnonymous]
         [HttpGet("checkusername")]
         public async Task<ActionResult<Boolean>>    
@@ -58,7 +68,11 @@ namespace ProjectBackEnd.Controllers
             return user == null;
         }
 
-
+        /// <summary>
+        /// Login
+        /// </summary>
+        /// <param name="model">gegevens van gebruiker</param>
+        /// <returns></returns>
         [AllowAnonymous]
         [HttpPost]
         public async Task<ActionResult<String>> CreateToken(LoginDTO model)
@@ -73,6 +87,11 @@ namespace ProjectBackEnd.Controllers
             return BadRequest();
         }
 
+        /// <summary>
+        /// Maakt een token aan voor een nieuwe gebruiker
+        /// </summary>
+        /// <param name="user"></param>
+        /// <returns>Een string van de token</returns>
         private String GetToken(IdentityUser user)
         {
             // Createthetoken
