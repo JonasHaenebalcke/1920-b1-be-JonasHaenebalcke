@@ -63,6 +63,7 @@ namespace ProjectBackEnd.Controllers
         /// <param name="dto"></param>
         /// <returns>De nieuwe quote</returns>
         [HttpPost]
+        [AllowAnonymous]
         public ActionResult PostQuote(QuoteDTO dto)
         {
             Quote quote = new Quote(dto.Inhoud, dto.Date, dto.Auteur);
@@ -108,17 +109,18 @@ namespace ProjectBackEnd.Controllers
             return NoContent();
         }
 
-        // GET api/Quotes/[id]
+       /* // GET api/Quotes/[id]
         /// <summary>
         /// Geeft alle opmerkingen van een meegegeven quote, geordend op datum
         /// </summary>
         /// <param name="id">id van de corresponderende quote</param>
         /// <returns>alle opermkingen van opgegeven quote id</returns>
-        [HttpGet("{id}/opmerkingen")]
+        [HttpGet("{id}")]
+        [AllowAnonymous]
         public IEnumerable<Opmerking>GetOpmerkingenByDate(int id)//id is quote id
         {
            return _opmerkingRepository.GetAllOrderByDate(id);
-        }
+        }*/
 
         // POST api/Quotes/[id]
         /// <summary>
@@ -127,7 +129,8 @@ namespace ProjectBackEnd.Controllers
         /// <param name="id"></param>
         /// <param name="dto"></param>
         /// <returns>De nieuwe opmerking</returns>
-        [HttpPost("{id}/opmerkingen")]
+        [HttpPost("{id}")]
+        [AllowAnonymous]
         public ActionResult<Opmerking> PostOpmerking(int id, OpmerkingDTO dto)
         {
             Quote quote = _quoteRepository.GetBy(id);
@@ -135,9 +138,9 @@ namespace ProjectBackEnd.Controllers
             {
                 return NotFound();
             }
-            quote.AddOpmerking(new Opmerking(dto.Inhoud, dto.Date, dto.Quote, dto.Auteur));
+            quote.AddOpmerking(new Opmerking(dto.Inhoud, dto.Date, GetQuote(id).Value, dto.Auteur));
             _quoteRepository.SaveChanges();
-            return CreatedAtAction(nameof(GetOpmerkingenByDate), new { id = quote.Id }, quote);
+            return CreatedAtAction(nameof(GetQuote), new { id = quote.Id }, quote);
         }
     }
 }

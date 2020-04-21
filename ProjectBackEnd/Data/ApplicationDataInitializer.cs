@@ -24,9 +24,9 @@ namespace ProjectBackEnd.Data
             if (_context.Database.EnsureCreated())
             {
                 //Auteurs
-                Auteur axel = new Auteur("Axel", "Beuselinck", new DateTime(2001, 2, 19), "Een feestbeest dat heel gemotiveerd is om te werken, maar niet voor school. Dit zorgt natuurlijk voor een individu dat heel plezante dingen kan zeggen.", null);
-                Auteur jonas = new Auteur("Jonas", "Haenebalcke", new DateTime(2000, 8, 10), "Een ijverige student die af en toe wel iets grappigs zegt.", null);
-                Auteur wout = new Auteur("Wout", "Van Kets", new DateTime(2000, 7, 11), "Een lieve jongen, maar met heel flauwe humor.", null);
+                Auteur axel = new Auteur("Axel", "Beuselinck", /*new DateTime(2001, 2, 19),*/ "Een feestbeest dat heel gemotiveerd is om te werken, maar niet voor school. Dit zorgt natuurlijk voor een individu dat heel plezante dingen kan zeggen.", null);
+                Auteur jonas = new Auteur("Jonas", "Haenebalcke", /*new DateTime(2000, 8, 10),*/ "Een ijverige student die af en toe wel iets grappigs zegt.", null);
+                Auteur wout = new Auteur("Wout", "Van Kets", /*new DateTime(2000, 7, 11),*/ "Een lieve jongen, maar met heel flauwe humor.", null);
                 _context.Auteurs.AddRange(axel, jonas, wout);
                 _context.SaveChanges();
 

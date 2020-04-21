@@ -57,7 +57,7 @@ namespace ProjectBackEnd.Controllers
         [HttpPost]
         public ActionResult PostAuteur(AuteurDTO dto)
         {
-            Auteur auteur = new Auteur(dto.Voornaam, dto.Achternaam, dto.GeboortDatum, dto.Omschrijving, null);
+            Auteur auteur = new Auteur(dto.Voornaam, dto.Achternaam, /*dto.GeboortDatum,*/ dto.Omschrijving, null);
             _auteurRepository.Add(auteur);
             _auteurRepository.SaveChanges();
             return CreatedAtAction(nameof(GetAuteurByName), new { naam = auteur.Voornaam + " " + auteur.Achternaam }, auteur);

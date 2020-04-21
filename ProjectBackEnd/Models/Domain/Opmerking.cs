@@ -13,7 +13,7 @@ namespace ProjectBackEnd.Models
         public string Auteur { get; set; }
         #endregion
 
-        #region Constructor
+        #region Constructor 
         public Opmerking(string inhoud, DateTime date, Quote quote, string auteur)
         {
             Inhoud = inhoud;
@@ -23,10 +23,7 @@ namespace ProjectBackEnd.Models
             Auteur = auteur;
         }
 
-        public Opmerking()
-        {
-
-        }
+        public Opmerking() { }
         #endregion
 
     }

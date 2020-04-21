@@ -14,8 +14,8 @@ namespace ProjectBackEnd.DTOs
         public string Inhoud { get; set; }
         [Required]
         public DateTime Date { get; set; }
-        [Required]
-        public Quote Quote { get; set; }
+        //[Required]
+        //public Quote Quote { get; set; }
         [Required]
         public int Rating { get; set; }
         [Required]

@@ -9,7 +9,7 @@ namespace ProjectBackEnd.Models
         public String Voornaam { get; set; }
         public string Achternaam { get; set; }
         public ICollection<Quote> Quotes { get; set; }
-        public DateTime GeboortDatum { get; set; }
+        //public DateTime GeboortDatum { get; set; }
         public string Omschrijving { get; set; }
         public string? Foto { get; set; }
 
@@ -17,11 +17,11 @@ namespace ProjectBackEnd.Models
         #endregion
 
         #region Constructor
-        public Auteur(string voornaam, string achternaam, DateTime geboortDatum, string omschrijving, string? foto)
+        public Auteur(string voornaam, string achternaam, /*DateTime geboortDatum,*/ string omschrijving, string? foto)
         {
             Voornaam = voornaam;
             Achternaam = achternaam;
-            GeboortDatum = geboortDatum;
+            /*GeboortDatum = geboortDatum;*/
             Omschrijving = omschrijving;
             Foto = foto;
         }
