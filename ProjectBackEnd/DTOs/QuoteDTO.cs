@@ -10,6 +10,7 @@ namespace ProjectBackEnd.DTOs
     {
         public string Inhoud { get; set; }
         public DateTime Date { get; set; }
-        public Auteur Auteur { get; set; }
+        public int auteurId { get; set; }
+        //public Auteur Auteur { get; set; }
     }
 }

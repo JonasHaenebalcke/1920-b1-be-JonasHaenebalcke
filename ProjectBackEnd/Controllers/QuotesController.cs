@@ -21,12 +21,14 @@ namespace ProjectBackEnd.Controllers
         private readonly IOpmerkingRepository _opmerkingRepository;
         private readonly IQuoteRepository _quoteRepository;
         private readonly IGebruikerRepository _gebruikerRepository;
+        private readonly IAuteurRepository _auteurRepository;
 
-        public QuotesController(IOpmerkingRepository opmerking, IQuoteRepository quote, IGebruikerRepository gebruikerRepository)
+        public QuotesController(IOpmerkingRepository opmerking, IQuoteRepository quote, IGebruikerRepository gebruikerRepository, IAuteurRepository auteurRepository)
         {
             _opmerkingRepository = opmerking;
             _quoteRepository = quote;
             _gebruikerRepository = gebruikerRepository;
+            _auteurRepository = auteurRepository;
         }
         // GET: api/Quotes
         /// <summary>
@@ -66,7 +68,7 @@ namespace ProjectBackEnd.Controllers
         [AllowAnonymous]
         public ActionResult PostQuote(QuoteDTO dto)
         {
-            Quote quote = new Quote(dto.Inhoud, dto.Date, dto.Auteur);
+            Quote quote = new Quote(dto.Inhoud, dto.Date, _auteurRepository.GetBy(dto.auteurId));
             _quoteRepository.Add(quote);
             _quoteRepository.SaveChanges();
             return CreatedAtAction(nameof(GetQuote), new { id = quote.Id }, quote);

@@ -24,10 +24,10 @@ namespace ProjectBackEnd.Data.Repositories
             return _quotes.Include(q => q.Opmerkingen).Include(q => q.Auteur).OrderBy(q => q.Date).ToList();
         }
 
-        public IEnumerable<Quote> GetAllOrderByDate()
-        {
-            return _quotes.OrderBy(q => q.Date).Include(q => q.Opmerkingen).Include(q => q.Auteur).ToList();
-        }
+        //public IEnumerable<Quote> GetAllOrderByDate()
+        //{
+        //    return _quotes.OrderBy(q => q.Date).Include(q => q.Opmerkingen).Include(q => q.Auteur).ToList();
+        //}
 
         public Quote GetBy(int id)
         {
