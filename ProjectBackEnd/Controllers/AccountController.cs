@@ -6,6 +6,7 @@ using Microsoft.IdentityModel.Tokens;
 using ProjectBackEnd.DTOs;
 using ProjectBackEnd.Models.Domain;
 using System;
+using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
@@ -39,16 +40,16 @@ namespace ProjectBackEnd.Controllers
         [HttpPost("register")]
         public async Task<ActionResult<String>> Register(RegisterDTO model)
         {
-            
+
             IdentityUser user = new IdentityUser { UserName = model.Gebruikersnaam };
-            Gebruiker gebruiker = new Gebruiker(model.Voornaam, model.Achternaam, model.Gebruikersnaam);
+            Gebruiker gebruiker = new Gebruiker(model.Voornaam, model.Achternaam, model.Gebruikersnaam, "gebruiker");
             var result = await _userManager.CreateAsync(user, model.Wachtwoord);
 
             if (result.Succeeded)
             {
                 _gebruikerRepository.Add(gebruiker);
                 _gebruikerRepository.SaveChanges();
-                string token = GetToken(user);
+                string token = await GetTokenAsync(user);
                 return Created("", token);
             }
             return BadRequest();
@@ -61,7 +62,7 @@ namespace ProjectBackEnd.Controllers
         /// <returns>of gebruikersnaam nog beschrikbaar is</returns>
         [AllowAnonymous]
         [HttpGet("checkusername")]
-        public async Task<ActionResult<Boolean>>    
+        public async Task<ActionResult<Boolean>>
         CheckAvailableUserName(string gebuikersnaam)
         {
             var user = await _userManager.FindByNameAsync(gebuikersnaam);
@@ -81,7 +82,7 @@ namespace ProjectBackEnd.Controllers
             {
                 var result = await _signInManager.CheckPasswordSignInAsync(user, model.Wachtwoord, false); if (result.Succeeded)
                 {
-                    string token = GetToken(user); return Created("", token); //returns only the token                    
+                    string token = await GetTokenAsync(user); return Created("", token); //returns only the token                    
                 }
             }
             return BadRequest();
@@ -92,13 +93,16 @@ namespace ProjectBackEnd.Controllers
         /// </summary>
         /// <param name="user"></param>
         /// <returns>Een string van de token</returns>
-        private String GetToken(IdentityUser user)
+        private async Task<string> GetTokenAsync(IdentityUser user)
         {
+            var RoleClaims = await _userManager.GetClaimsAsync(user);
             // Createthetoken
-            var claims = new[] {
+            var claims = new List<Claim>() {
               //  new Claim(JwtRegisteredClaimNames.Sub, user.Email), Niet zeker of dit in commentaar mag
                 new Claim(JwtRegisteredClaimNames.UniqueName, user.UserName)
             };
+
+            claims.AddRange(RoleClaims);
 
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Tokens:Key"]));
             var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);

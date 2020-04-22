@@ -7,6 +7,7 @@
         public string Voornaam { get; set; }
         public string Achternaam { get; set; }
         public string Gebruikesnaam { get; set; }
+        public string Rol { get; set; }
         #endregion
 
         #region Constructors
@@ -15,11 +16,12 @@
 
         }
 
-        public Gebruiker(string voornaam, string achternaam, string gebruikersnaam)
+        public Gebruiker(string voornaam, string achternaam, string gebruikersnaam, string rol)
         {
             Voornaam = voornaam;
             Achternaam = achternaam;
             Gebruikesnaam = gebruikersnaam;
+            Rol = rol;
         }
         #endregion
     }

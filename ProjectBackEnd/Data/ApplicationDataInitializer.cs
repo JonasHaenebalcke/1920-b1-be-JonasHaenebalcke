@@ -2,6 +2,7 @@
 using ProjectBackEnd.Models;
 using ProjectBackEnd.Models.Domain;
 using System;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace ProjectBackEnd.Data
@@ -50,18 +51,31 @@ namespace ProjectBackEnd.Data
 
 
 
-                Gebruiker gebruiker = new Gebruiker("Jonas", "Haenebalcke", "Jonidinges");
+                Gebruiker gebruiker = new Gebruiker("Jonas", "Haenebalcke", "Jonidinges", "admin");
+                Gebruiker gebruiker2 = new Gebruiker("Axel", "Beuselinck", "AxelPaxel", "gebruiker");
                 _context.Gebruikers.Add(gebruiker);
-                await CreateUser(gebruiker.Gebruikesnaam, "wachtwoord");
+                _context.Gebruikers.Add(gebruiker);
+                await CreateUser(gebruiker.Gebruikesnaam, "wachtwoord", gebruiker.Rol);
+                await CreateUser(gebruiker2.Gebruikesnaam, "wachtwoord", gebruiker2.Rol);
                 _context.SaveChanges();
             }
         }
 
 
-        private async Task CreateUser(string gebruikersnaam, string password)
+        private async Task CreateUser(string gebruikersnaam, string password, string rol)
         {
-            var user = new IdentityUser { UserName = gebruikersnaam };
-            await _userManager.CreateAsync(user, password);
+            if (rol.Equals("admin"))
+            {
+                var user = new IdentityUser { UserName = gebruikersnaam };
+                await _userManager.CreateAsync(user, password);
+                await _userManager.AddClaimAsync(user, new Claim(ClaimTypes.Role, "admin"));
+            }
+            else
+            {
+                var user = new IdentityUser { UserName = gebruikersnaam };
+                await _userManager.CreateAsync(user, password);
+                await _userManager.AddClaimAsync(user, new Claim(ClaimTypes.Role, "gebruiker"));
+            }
         }
     }
 }

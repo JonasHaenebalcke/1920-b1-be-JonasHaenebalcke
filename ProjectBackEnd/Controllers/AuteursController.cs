@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using ProjectBackEnd.DTOs;
 using ProjectBackEnd.Models;
 using System.Collections.Generic;
@@ -55,6 +56,7 @@ namespace ProjectBackEnd.Controllers
         /// <param name="dto"></param>
         /// <returns>De nieuwe auteur</returns>
         [HttpPost]
+        [AllowAnonymous]
         public ActionResult PostAuteur(AuteurDTO dto)
         {
             Auteur auteur = new Auteur(dto.Voornaam, dto.Achternaam, /*dto.GeboortDatum,*/ dto.Omschrijving, null);

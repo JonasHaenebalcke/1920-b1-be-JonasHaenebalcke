@@ -15,6 +15,7 @@ using ProjectBackEnd.Models;
 using ProjectBackEnd.Models.Domain;
 using System;
 using System.Linq;
+using System.Security.Claims;
 using System.Text;
 
 namespace ProjectBackEnd
@@ -64,7 +65,7 @@ namespace ProjectBackEnd
                 // User settings.
                 options.User.AllowedUserNameCharacters =
                 "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._@+";
-               // options.User.RequireUniqueEmail = true;
+                // options.User.RequireUniqueEmail = true;
             });
 
 
@@ -106,6 +107,11 @@ namespace ProjectBackEnd
                     RequireExpirationTime = true//Ensure token hasn't expired
                 };
             });
+
+            services.AddAuthorization(options => { 
+                options.AddPolicy("AdminOnly", policy =>
+                policy.RequireClaim(ClaimTypes.Role, "admin")); });
+      
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
