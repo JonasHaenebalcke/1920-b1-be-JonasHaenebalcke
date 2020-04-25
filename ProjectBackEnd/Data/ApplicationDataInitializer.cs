@@ -33,7 +33,7 @@ namespace ProjectBackEnd.Data
 
                 //Quotes
                 Quote quote1 = new Quote("Omg, that's like the Netherlands and Dutch language combined!", new DateTime(2019, 1, 25), axel);
-                Quote quote2 = new Quote("Ik ben uw animal king", new DateTime(2019, 1, 11), jonas) { Rating = 5 };
+                Quote quote2 = new Quote("Ik ben uw animal king", new DateTime(2019, 1, 11), jonas); /*{ Rating = 5 };*/
                 Quote quote3 = new Quote("Do you even intellect?", new DateTime(2019, 1, 25), wout);
                 Quote quote4 = new Quote("How many IQ cells do you have?", new DateTime(2019, 2, 19), axel);
                 Quote quote5 = new Quote("Ik trigger weinig mensen", new DateTime(2019, 9, 10), axel);

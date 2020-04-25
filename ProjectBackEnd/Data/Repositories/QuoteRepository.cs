@@ -39,10 +39,10 @@ namespace ProjectBackEnd.Data.Repositories
             return _quotes.Where(q => q.Auteur.Id == id).Include(q => q.Opmerkingen).Include(q => q.Auteur).ToList();
         }
 
-        public IEnumerable<Quote> GetAllOrderByRating()
-        {
-            return _quotes.OrderBy(q => q.Rating).Include(q => q.Opmerkingen).Include(q => q.Auteur).ToList();
-        }
+        //public IEnumerable<Quote> GetAllOrderByRating()
+        //{
+        //    return _quotes.OrderBy(q => q.Rating).Include(q => q.Opmerkingen).Include(q => q.Auteur).ToList();
+        //}
 
         public void Add(Quote quote)
         {

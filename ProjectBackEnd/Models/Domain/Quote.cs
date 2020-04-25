@@ -9,7 +9,7 @@ namespace ProjectBackEnd.Models
     {
         #region Properties
         public string Inhoud { get; set; }
-        public int Rating { get; set; }
+        //public int Rating { get; set; }
         public DateTime Date { get; set; }
         public ICollection<Opmerking> Opmerkingen { get; set; }
         public Auteur Auteur { get; set; }
@@ -20,7 +20,7 @@ namespace ProjectBackEnd.Models
         public Quote(string inhoud, DateTime date, Auteur auteur)
         {
             Inhoud = inhoud;
-            Rating = 0;
+            //Rating = 0;
             Date = date;
             Auteur = auteur;
         }

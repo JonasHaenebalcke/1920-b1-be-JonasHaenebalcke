@@ -11,7 +11,7 @@ namespace ProjectBackEnd.Models
         IEnumerable<Quote> GetAll();
         IEnumerable<Quote> GetByAuteur(int id);
         //IEnumerable<Quote> GetAllOrderByDate();
-        IEnumerable<Quote> GetAllOrderByRating();
+        //IEnumerable<Quote> GetAllOrderByRating();
         void Add(Quote quote);
         void Delete(Quote quote);
         void Update(Quote quote);

@@ -8,7 +8,7 @@ namespace ProjectBackEnd.Models
         public string Inhoud { get; set; }
         public DateTime Date { get; set; }
         public Quote Quote { get; set; }
-        public int Rating { get; set; }
+        //public int Rating { get; set; }
         public int Id { get; set; }
         public string Auteur { get; set; }
         #endregion
@@ -19,7 +19,7 @@ namespace ProjectBackEnd.Models
             Inhoud = inhoud;
             Date = date;
             Quote = quote;
-            Rating = 0;
+            //Rating = 0;
             Auteur = auteur;
         }
 
