@@ -140,7 +140,8 @@ namespace ProjectBackEnd.Controllers
             {
                 return NotFound();
             }
-            quote.AddOpmerking(new Opmerking(dto.Inhoud, dto.Date, GetQuote(id).Value, dto.Auteur));
+               //Gewoon hier datum aanmaken ipv doorgeven
+            quote.AddOpmerking(new Opmerking(dto.Inhoud, new DateTime(dto.Date.Year, dto.Date.Month, dto.Date.Day, DateTime.Now.Hour, DateTime.Now.Minute, DateTime.Now.Second), GetQuote(id).Value, dto.Auteur));
             _quoteRepository.SaveChanges();
             return CreatedAtAction(nameof(GetQuote), new { id = quote.Id }, quote);
         }
