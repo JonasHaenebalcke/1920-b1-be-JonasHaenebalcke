@@ -22,6 +22,7 @@ namespace ProjectBackEnd
 {
     public class Startup
     {
+        readonly string MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -32,6 +33,23 @@ namespace ProjectBackEnd
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            //CORS
+            services.AddCors(options =>
+            {
+                options.AddPolicy(name: MyAllowSpecificOrigins,
+                                  builder =>
+                                  {
+                                      builder.WithOrigins("http://192.168.56.1:8080",
+                                            "http://192.168.1.1:8080",
+                                            "http://192.168.0.115:8080",
+                                            "http://127.0.0.1:8080",
+                                            "http://127.0.0.1",
+                                            "http://localhost:4200")
+                                        .AllowAnyHeader()
+                                      .AllowAnyMethod(); ;
+                                  });
+            });
+
             services.AddControllers().AddNewtonsoftJson(options =>
                 options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
 
@@ -89,10 +107,7 @@ namespace ProjectBackEnd
                     new AspNetCoreOperationSecurityScopeProcessor("JWT")); //adds the token when a request is send});
             }); //for OpenAPI 3.0 else AddSwaggerDocument();
 
-            //CORS
-            services.AddCors(options =>
-            options.AddPolicy("AllowAllOrigins", builder =>
-            builder.AllowAnyOrigin()));
+
 
 
 
@@ -108,10 +123,12 @@ namespace ProjectBackEnd
                 };
             });
 
-            services.AddAuthorization(options => { 
+            services.AddAuthorization(options =>
+            {
                 options.AddPolicy("AdminOnly", policy =>
-                policy.RequireClaim(ClaimTypes.Role, "admin")); });
-      
+                policy.RequireClaim(ClaimTypes.Role, "admin"));
+            });
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -139,7 +156,7 @@ namespace ProjectBackEnd
             ApplicationDataInitializer.InitializeData().Wait();
 
             //CORS
-            app.UseCors("AllowAllOrigins");
+            app.UseCors(MyAllowSpecificOrigins);
 
             app.UseAuthentication();
         }
