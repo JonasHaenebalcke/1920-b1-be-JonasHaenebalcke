@@ -22,7 +22,7 @@ namespace ProjectBackEnd
 {
     public class Startup
     {
-        readonly string MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
+        readonly string AllowSpecificOrigins = "_allowSpecificOrigins";
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -36,7 +36,7 @@ namespace ProjectBackEnd
             //CORS
             services.AddCors(options =>
             {
-                options.AddPolicy(name: MyAllowSpecificOrigins,
+                options.AddPolicy(name: AllowSpecificOrigins,
                                   builder =>
                                   {
                                       builder.WithOrigins("http://192.168.56.1:8080",
@@ -156,7 +156,7 @@ namespace ProjectBackEnd
             ApplicationDataInitializer.InitializeData().Wait();
 
             //CORS
-            app.UseCors(MyAllowSpecificOrigins);
+            app.UseCors("AllowSpecificOrigins");
 
             app.UseAuthentication();
         }
