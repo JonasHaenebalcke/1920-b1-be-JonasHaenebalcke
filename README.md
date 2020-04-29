@@ -20,3 +20,5 @@ De backend bevat 3 controllers, een QuotesController, een AuteurController en ee
     o Hulp methode om gebruikers aan te maken
     
 De backend kan gecontroleerd worden met Swagger (of Postman)
+
+(Checklist requirements)[https://imgur.com/4jZnTfC]
