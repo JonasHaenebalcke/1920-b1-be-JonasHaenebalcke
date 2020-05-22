@@ -39,9 +39,9 @@ namespace ProjectBackEnd
                 options.AddPolicy(name: AllowSpecificOrigins,
                                   builder =>
                                   {
-                                      builder.WithOrigins("http://192.168.56.1:8080",
-                                            "http://192.168.1.1:8080",
-                                            "http://192.168.0.115:8080",
+                                      builder.WithOrigins(" http://192.168.56.1:8080",
+                                            "http://192.168.84.1:8080",
+                                            "http://192.168.0.157:8080",
                                             "http://127.0.0.1:8080",
                                             "http://127.0.0.1",
                                             "http://localhost:4200")
@@ -156,7 +156,7 @@ namespace ProjectBackEnd
             ApplicationDataInitializer.InitializeData().Wait();
 
             //CORS
-            app.UseCors("AllowSpecificOrigins");
+            app.UseCors(AllowSpecificOrigins);
 
             app.UseAuthentication();
         }
